@@ -41,12 +41,6 @@ label:not(.hilt) {
   grid-column: 1 / -1;
   top: 25%;
 
-  #on-off {
-    position: absolute;
-    width: 0;
-    height: 0;
-  }
-
   .hilt {
     display: block;
     width: 0.75rem;
@@ -88,6 +82,21 @@ label:not(.hilt) {
       0 0 3em hsl($bladeHue, 100%, 50% / 0.3),
       0 0 5em hsl($bladeHue, 100%, 50% / 0.2);
 
+    transition: transform 125ms ease-out;
+    transform-origin: bottom;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-radius: inherit;
+      z-index: 100;
+    }
+
     &::after {
       content: "";
       position: absolute;
@@ -100,8 +109,22 @@ label:not(.hilt) {
       filter: blur(0.5em);
       opacity: 1;
       animation: pulse linear 5s infinite;
-      z-index: -1;
     }
+  }
+}
+
+#on-off {
+  position: absolute;
+  width: 0;
+  height: 0;
+
+  // Turn Lightsaber on and off
+  &:not(checked) + .blade {
+    transform: scaleY(0);
+  }
+
+  &:checked + .blade {
+    transform: scaleY(1);
   }
 }
 
