@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap");
+:root {
+  --bladeHue: 120;
+  --bladeLightness: 50%;
+}
+
 *,
 *::before,
 *::after {
@@ -50,7 +55,7 @@ label:not(.hilt) {
   width: 100%;
   bottom: 100%;
   border-radius: 100vw 100vw 0 0;
-  box-shadow: inset 0 0 4px 120, 100%, 50%/1, 0 0 1em #40ff40, 0 0 1.5em #6dff6d, 0 0 2em white, 0 0 3em white, 0 0 5em white;
+  box-shadow: inset 0 0 4px var(--bladeHue), 100%, 50%/1, 0 0 1em hsl(var(--bladeHue), 100%, 62.5%), 0 0 1.5em hsl(var(--bladeHue), 100%, 71.42857%), 0 0 2em hsl(var(--bladeHue), 100%, 100%), 0 0 3em hsl(var(--bladeHue), 100%, 166.66667%), 0 0 5em hsl(var(--bladeHue), 100%, 250%);
   transition: transform 125ms ease-out;
   transform-origin: bottom;
 }
@@ -70,11 +75,11 @@ label:not(.hilt) {
 .lightsaber .blade::after {
   content: "";
   position: absolute;
-  top: 0%;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: lime;
+  background: hsl(var(--bladeHue), 100%, var(--bladeLightness));
   border-radius: inherit;
   filter: blur(0.5em);
   opacity: 1;
@@ -93,6 +98,35 @@ label:not(.hilt) {
 
 #on-off:checked + .blade {
   transform: scaleY(1);
+}
+
+#red:checked ~ .lightsaber {
+  --bladeHue: 360;
+}
+
+#blue:checked ~ .lightsaber {
+  --bladeHue: 195;
+}
+
+#yellow:checked ~ .lightsaber {
+  --bladeHue: 60;
+}
+
+#purple:checked ~ .lightsaber {
+  --bladeHue: 290;
+}
+
+#dark:checked ~ .lightsaber {
+  --bladeLightness: 100%;
+}
+
+#dark:checked ~ .lightsaber .blade {
+  border-radius: 100% / 300px 10px 0 0;
+}
+
+#dark:checked ~ .lightsaber .blade::before {
+  background: #000;
+  --bladeLightness: 100%;
 }
 
 @keyframes pulse {
